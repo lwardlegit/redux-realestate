@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getListings} from '../actions/postActions';
+import '../static/css/App.css';
+import house from '../static/images/house.jpg';
 
     class Properties extends Component {
 
@@ -16,19 +18,25 @@ import {getListings} from '../actions/postActions';
    
     render() {
         const propertyList = this.props.listings.map(property => (
-            <div key = {property.propertyName}>
+            <div className="listing" key = {property.propertyName}>
                 <h3>{property.propertyName}</h3>
-                <div style={{width: '4em', height:'4em', backgroundColor: 'blue'}}>image</div>
-                <p>{property.footage}</p>
-                <p>{property.address}</p>
-                <p>{property.price}</p>
+                <img src = { house } className="image" image alt="a listing"/>
+
+                <div className="listingDetails">
+                <p> {property.footage} </p>
+                <p> {property.address} </p>
+                <p> {property.price}   </p>
+                </div>
             </div>
         ))
         return (
-            <div>
-                <h1>Current Listings</h1>
+            <div className="listingContainer">
+                <h2>Listings</h2>
+            
+            <div className="mappedListings">
                     {propertyList}
             </div> 
+            </div>
         )
     }
 }
