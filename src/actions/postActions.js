@@ -1,11 +1,11 @@
-import {GET_LISTINGS, NEW_PROPERTY} from './types';
+import {GET_LISTINGS, NEW_LISTING} from './types';
 
 
-export function newProperty(form){
+export function newProperty(formdata){
     return function(dispatch){
         dispatch({
-            type: NEW_PROPERTY,
-            payload: form
+            type: NEW_LISTING,
+            payload: formdata
         })
     }
 }

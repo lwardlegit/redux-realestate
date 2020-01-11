@@ -6,11 +6,10 @@ class Postform extends Component {
     constructor(props){
         super(props)
         this.state={
-            id: this.props.properties[this.props.properties.length-1]+1,
-            propertyName: 'enter name',
-            footage: 'enter size in sqft',
-            address: 'full address',
-            price: '$ 00.00'
+            propertyName: ' enter name ',
+            footage: ' size in sqft ',
+            address: ' full address ',
+            price: ' $ 00.00 '
         }   
     }
 
@@ -21,7 +20,6 @@ class Postform extends Component {
     onSubmit = (e) =>{
         e.preventDefault()
         const newListing = {
-            id: this.state.id,
             propertyName: this.state.propertyName,
             footage: this.state.footage,
             address: this.state.address,
@@ -39,22 +37,22 @@ class Postform extends Component {
                 <form onSubmit = {this.onSubmit}>
                     <div>
                         <label>your listing name</label><br/>
-                        <input name="propertyName" type="text" onChange={this.onChange} value={this.props.title}/>
+                        <input name="propertyName" type="text" onChange={this.onChange} placeholder={this.state.propertyName} value={this.props.title}/>
                     </div>
 
                     <div>
                         <label>listing size </label><br/>
-                        <input name="footage" onChange={this.onChange} value={this.props.body}/>
+                        <input name="footage" onChange={this.onChange} placeholder={this.state.footage} value={this.props.body}/>
                     </div>
 
                     <div>
                         <label>listing location </label><br/>
-                        <input name="address" onChange={this.onChange} value={this.props.body}/>
+                        <input name="address" onChange={this.onChange} placeholder={this.state.address} value={this.props.body}/>
                     </div>
 
                     <div>
                         <label>desired price </label><br/>
-                        <input name="price" onChange={this.onChange} value={this.props.body}/>
+                        <input name="price" onChange={this.onChange} placeholder={this.state.price} value={this.props.body}/>
                     </div>
 
                     <br/>
@@ -66,7 +64,13 @@ class Postform extends Component {
 }
 
 Postform.propTypes = {
-    newProperty: PropTypes.func.isRequired
+    newProperty: PropTypes.func.isRequired,
+    new: PropTypes.object
 }
 
-export default connect(null, {newProperty})(Postform)
+const mapStateToProps = state =>({
+    listings: state.listings.properties,
+    new: state.listings.newListing
+});
+
+export default connect(mapStateToProps, {newProperty})(Postform)

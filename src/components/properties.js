@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getListings} from '../actions/postActions';
 
- class Properties extends Component {
+    class Properties extends Component {
 
     componentDidMount(){
-        getListings()
+        this.props.getListings()
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.new){
+            this.props.listings.unshift(nextProps.new)
+        }
     }
    
     render() {
-        const properties = this.props.properties.map(property => (
-            <div key = {property.id}>
+        const propertyList = this.props.listings.map(property => (
+            <div key = {property.propertyName}>
                 <h3>{property.propertyName}</h3>
                 <div style={{width: '4em', height:'4em', backgroundColor: 'blue'}}>image</div>
                 <p>{property.footage}</p>
@@ -22,18 +27,18 @@ import {getListings} from '../actions/postActions';
         return (
             <div>
                 <h1>Current Listings</h1>
-                    {properties}
+                    {propertyList}
             </div> 
         )
     }
 }
 Properties.propTypes = {
-    properties: PropTypes.array.isRequired,
-    newListing: PropTypes.object
+    new: PropTypes.object,
+    listings: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state =>({
-    properties: state.properties.properties,
-    newListing: state.properties.newListing
+    listings: state.listings.properties,
+    new: state.listings.newListing
 });
-export default connect(mapStateToProps)(Properties)
+export default connect(mapStateToProps, {getListings})(Properties)

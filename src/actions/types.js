@@ -1,3 +1,3 @@
-export const NEW_PROPERTY = 'NEW_PROPERTY';
+export const NEW_LISTING = 'NEW_PROPERTY';
 export const GET_LISTINGS = 'NEW_PROPERTY';
 

@@ -3,8 +3,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers'; //the index.js file
 
 const initialState = {
-
-    
+  
 }
     
 const middleware = [thunk]
